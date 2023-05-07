@@ -3,12 +3,13 @@ import APIClient from '../services/apiClient';
 import Genre from '../entities/Genre';
 import genres from '../data/genres';
 const apiClient = new APIClient<Genre>('/genres');
+import ms from 'ms';
 
 const useGenres = () =>
   useQuery({
     queryKey: ['genres'],
     queryFn: apiClient.getAll,
-    staleTime: 24 * 60 * 60 * 1000,
+    staleTime: ms('24h'),
     initialData: genres,
   });
 
